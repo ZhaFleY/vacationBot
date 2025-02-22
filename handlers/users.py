@@ -12,9 +12,10 @@ session = Session_local()
 
 
 
-@router.message(CommandStart)
+@router.message(CommandStart())
 async def cmd_start(message: Message):
     await message.answer(text="Менеджер отпусков компании ОнИн🌴",reply_markup=main_menu.as_markup())
+
 
 
 @router.callback_query(F.data=="id1")
@@ -29,5 +30,4 @@ async def add_vac(cb: CallbackQuery):
     pass
 
 
-@router.callback_query(F.data == "id4")
-async def add_employer(cb: CallbackQuery):
+

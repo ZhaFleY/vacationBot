@@ -17,3 +17,11 @@ for idx,button in enumerate(buttons):
     main_menu.add(InlineKeyboardButton(text=button, callback_data=datas[idx]))
 
 main_menu.adjust(2)
+
+
+def cancel_button():
+    keyboard = InlineKeyboardBuilder()
+
+    kb= InlineKeyboardButton(text="Отмена", callback_data="cancel")
+    keyboard.add(kb)
+    return keyboard.as_markup()

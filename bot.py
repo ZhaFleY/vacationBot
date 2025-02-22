@@ -5,12 +5,13 @@ from aiogram.filters import Command,CommandStart
 from aiogram.types import Message
 import logging
 from handlers import users
+from FSM import add_employer
 logging.basicConfig(level=logging.INFO)
 async def main():
     bot = Bot(token=token)
     dp = Dispatcher()
 
-    dp.include_routers(users.router)
+    dp.include_routers(users.router,add_employer.router)
 
 
     await dp.start_polling(bot)
