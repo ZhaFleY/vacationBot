@@ -2,8 +2,8 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
-buttons = ["Мои отпуска🌴","Добавить отпуск🏝️","Удалить отпуск🚫","Добавить участника👥"]
-datas = ["id1","id2","id3","id4"]
+buttons = ["Мои отпуска🌴","Добавить отпуск🏝️","Удалить отпуск🚫","Добавить участника👥","Удалить участника"]
+datas = ["id1","id2","id3","id4","id5"]
 
 main_menu = InlineKeyboardBuilder(
 

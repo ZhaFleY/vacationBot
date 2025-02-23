@@ -16,6 +16,9 @@ class LoadEmployer(StatesGroup):
     load_lastname = State()
     load_tg_id = State()
 
+class DeleteEmployer(StatesGroup):
+    delete_id = State()
+
 @router.callback_query(F.data == "id4")
 async def start_load_employer(cb: CallbackQuery, state: FSMContext):
     await cb.message.answer("Введите имя сотрудника:", reply_markup=cancel_button())
@@ -57,3 +60,19 @@ async def get_tg_id(message: Message, state: FSMContext):
 async def cancel(cb: CallbackQuery, state: FSMContext):
     await state.clear()
     await cb.message.answer(text="Произведена отмена")
+
+
+
+@router.callback_query(F.data == "id5")
+async def delete_employer(cb: CallbackQuery, state: FSMContext):
+    await cb.message.answer(text="Введите Telegram ID сотрудника",reply_markup=cancel_button())
+    await state.set_state(DeleteEmployer.delete_id)
+
+
+@router.message(DeleteEmployer.delete_id)
+async def delete_employer1(message: Message, state: FSMContext):
+    user = session.query(Employers).filter(Employers.telegram_id == str(message.text)).first()
+    session.delete(user)
+    session.commit()
+    await state.clear()
+    await message.answer("Успешно удален!")
