@@ -74,5 +74,6 @@ async def delete_employer1(message: Message, state: FSMContext):
     user = session.query(Employers).filter(Employers.telegram_id == str(message.text)).first()
     session.delete(user)
     session.commit()
+    session.close()
     await state.clear()
     await message.answer("Успешно удален!")
